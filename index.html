@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kohli Paglu</title>
+<meta name="description" content="A living scroll through Virat Kohli's career — Delhi academy to World Cup nights, RCB's 18-year wait, and the numbers still growing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; }
+  :root{
+    color-scheme: dark;
+    --ground:#0e1116;
+    --ground-2:#141a22;
+    --wood-1:#2b1d14;
+    --wood-2:#1c130d;
+    --ink:#f2eee4;
+    --ink-dim:#b9af9c;
+    --ink-faint:#7c7568;
+    --gold:#e8c468;
+    --gold-soft:#a6842e;
+    --blue:#3b6fd6;
+    --teal:#2fa6a2;
+    --red:#e0332b;
+    --rcb-gold:#f2b90c;
+    --line:#2a3038;
+    --font-display:"Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-body:"Archivo", "Helvetica Neue", Arial, sans-serif;
+    --font-mono:"Space Mono", "SFMono-Regular", Menlo, monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.55;
+    padding-inline:0;
+  }
+  h1,h2,h3{ font-family:var(--font-display); text-wrap:balance; margin:0; }
+  p{ margin:0; }
+  img{ max-width:100%; }
+  a{ color:var(--gold); }
+  ::selection{ background:var(--gold); color:#1c130d; }
+
+  .wrap{ max-width:760px; margin-inline:auto; padding-inline:20px; }
+
+  /* ---------- nav ---------- */
+  nav.top{
+    position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+    background:rgba(14,17,22,.88); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    max-width:760px; margin-inline:auto; padding:10px 20px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .nav-mark{
+    font-family:var(--font-mono); font-weight:700; font-size:15px;
+    color:var(--gold); flex:none; letter-spacing:.02em;
+  }
+  .nav-links{
+    display:flex; gap:4px; overflow-x:auto; scrollbar-width:none;
+  }
+  .nav-links::-webkit-scrollbar{ display:none; }
+  .nav-links a{
+    flex:none; font-size:12.5px; letter-spacing:.03em; text-transform:uppercase;
+    color:var(--ink-dim); text-decoration:none; padding:6px 10px; border-radius:999px;
+    white-space:nowrap; transition:background .15s, color .15s;
+  }
+  .nav-links a:hover{ background:var(--ground-2); color:var(--ink); }
+
+  /* ---------- hero ---------- */
+  header.hero{
+    padding:56px 20px 40px; text-align:center;
+    background:
+      radial-gradient(ellipse 120% 70% at 50% 0%, rgba(232,196,104,.10), transparent 60%),
+      radial-gradient(ellipse 140% 90% at 50% 110%, rgba(59,111,214,.10), transparent 60%);
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    display:inline-block; font-family:var(--font-mono); font-size:11.5px;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--gold);
+    border:1px solid rgba(232,196,104,.35); border-radius:999px;
+    padding:5px 14px; margin-bottom:22px;
+  }
+  .hero-number{
+    font-family:var(--font-mono); font-weight:700; font-size:clamp(64px,22vw,120px);
+    line-height:.9; color:var(--ink); opacity:.14; letter-spacing:-.02em;
+  }
+  .hero h1{
+    font-size:clamp(34px,7vw,56px); font-weight:800; margin-top:-.4em;
+    background:linear-gradient(180deg, var(--ink), var(--ink-dim));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero .tagline{
+    max-width:480px; margin:18px auto 0; font-size:15.5px; color:var(--ink-dim);
+  }
+  .jersey-strip{
+    display:flex; justify-content:center; gap:8px; margin-top:28px;
+  }
+  .chip{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:.06em;
+    padding:5px 11px; border-radius:6px; color:#0e1116; font-weight:700;
+  }
+
+  /* ---------- seam divider ---------- */
+  .seam{
+    height:14px; margin:0;
+    background-image: repeating-linear-gradient(90deg, var(--line) 0 2px, transparent 2px 16px);
+    background-position:center; background-repeat:repeat-x; background-size:16px 1px;
+    position:relative;
+  }
+  .seam::before, .seam::after{
+    content:""; position:absolute; top:2px; width:1px; height:10px; background:var(--line);
+  }
+
+  /* ---------- chapters ---------- */
+  section.chapter{
+    padding:52px 20px; border-bottom:1px solid var(--line);
+    opacity:0; transform:translateY(14px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  section.chapter.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    section.chapter{ opacity:1; transform:none; transition:none; }
+  }
+  .chapter-inner{ max-width:640px; margin-inline:auto; border-left:3px solid var(--rail,var(--gold)); padding-left:22px; }
+  .chapter-meta{
+    display:flex; align-items:baseline; gap:12px; margin-bottom:10px; flex-wrap:wrap;
+  }
+  .chapter-years{
+    font-family:var(--font-mono); font-size:13px; color:var(--rail,var(--gold));
+    font-weight:700; letter-spacing:.03em;
+  }
+  .chapter-tag{
+    font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-faint);
+  }
+  .chapter h2{ font-size:clamp(22px,4vw,30px); font-weight:700; margin-bottom:14px; }
+  .chapter p{ color:var(--ink-dim); font-size:15px; max-width:60ch; }
+  .chapter p + p{ margin-top:12px; }
+  .chapter strong{ color:var(--ink); font-weight:600; }
+  .pull{
+    margin-top:18px; padding:14px 16px; background:var(--ground-2);
+    border-radius:8px; font-family:var(--font-display); font-size:16px;
+    font-style:italic; color:var(--ink);
+  }
+
+  /* ---------- honours board ---------- */
+  section.board{ padding:52px 20px; border-bottom:1px solid var(--line); }
+  .board-panel{
+    max-width:640px; margin-inline:auto;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.03), transparent 40%),
+      linear-gradient(150deg, var(--wood-1), var(--wood-2));
+    border:1px solid #3a281a; border-radius:10px;
+    padding:28px 22px; box-shadow:0 20px 50px -25px rgba(0,0,0,.7);
+  }
+  .board-title{
+    text-align:center; font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:4px;
+  }
+  .board-sub{
+    text-align:center; font-family:var(--font-display); font-style:italic;
+    color:var(--ink-dim); font-size:14px; margin-bottom:22px;
+  }
+  .board-row{
+    display:grid; grid-template-columns:64px 1fr; gap:14px;
+    padding:11px 4px; border-bottom:1px dashed rgba(232,196,104,.16);
+    align-items:baseline;
+  }
+  .board-row:last-child{ border-bottom:none; }
+  .board-year{
+    font-family:var(--font-mono); color:var(--gold); font-size:13px; font-weight:700;
+  }
+  .board-entry{ color:#e9dfc8; font-size:14px; }
+  .board-entry b{ color:var(--gold); font-weight:700; }
+
+  /* ---------- stats / chart ---------- */
+  section.stats{ padding:52px 20px; border-bottom:1px solid var(--line); }
+  .stats-inner{ max-width:640px; margin-inline:auto; }
+  .stats h2{ font-size:24px; margin-bottom:6px; }
+  .stats .note{ color:var(--ink-faint); font-size:13px; margin-bottom:26px; }
+  .chart-card{
+    background:var(--ground-2); border:1px solid var(--line); border-radius:10px;
+    padding:20px 18px 14px;
+  }
+  svg.bars{ width:100%; height:auto; overflow:visible; }
+  .bar-label{ font-family:var(--font-body); font-size:12.5px; fill:var(--ink-dim); }
+  .bar-value{ font-family:var(--font-mono); font-size:13px; fill:var(--ink); font-variant-numeric:tabular-nums; }
+  .bar-note{ font-family:var(--font-mono); font-size:9.5px; fill:var(--ink-faint); letter-spacing:.04em; }
+  .grid-line{ stroke:var(--line); stroke-width:1; }
+  .bar-hit{ fill:transparent; }
+  .bar-hit:hover + .bar-fill{ filter:brightness(1.18); }
+  .legend-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:16px; font-size:12px; color:var(--ink-faint); }
+  .legend-row span{ display:inline-flex; align-items:center; gap:6px; }
+  .legend-dot{ width:8px; height:8px; border-radius:2px; display:inline-block; }
+  .tooltip{
+    position:fixed; pointer-events:none; z-index:30; font-family:var(--font-mono);
+    font-size:12px; background:#1c2027; color:var(--ink); border:1px solid var(--line);
+    padding:6px 9px; border-radius:6px; transform:translate(-50%,-130%); white-space:nowrap;
+    opacity:0; transition:opacity .1s;
+  }
+  .tooltip.show{ opacity:1; }
+
+  /* ---------- present / closing ---------- */
+  section.present{
+    padding:60px 20px 70px; text-align:center;
+    background:linear-gradient(180deg, transparent, rgba(224,51,43,.06));
+  }
+  .present-inner{ max-width:560px; margin-inline:auto; }
+  .present h2{ font-size:clamp(24px,5vw,32px); margin-bottom:16px; }
+  .present p{ color:var(--ink-dim); font-size:15px; }
+  .present p + p{ margin-top:12px; }
+  .pulse-row{ display:flex; justify-content:center; gap:8px; margin:24px 0; }
+  .pulse{
+    width:7px; height:7px; border-radius:50%; background:var(--gold);
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  .pulse:nth-child(2){ animation-delay:.2s; }
+  .pulse:nth-child(3){ animation-delay:.4s; }
+  @keyframes pulse{ 0%,100%{ opacity:.25; } 50%{ opacity:1; } }
+  @media (prefers-reduced-motion: reduce){ .pulse{ animation:none; opacity:.7; } }
+
+  footer{
+    padding:26px 20px 40px; text-align:center; font-size:12px; color:var(--ink-faint);
+  }
+  footer a{ color:var(--ink-dim); }
+
+  @media (max-width:480px){
+    .chapter-inner{ padding-left:16px; }
+    .board-row{ grid-template-columns:52px 1fr; gap:10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="nav-row">
+    <span class="nav-mark">№18</span>
+    <div class="nav-links">
+      <a href="#origins">Origins</a>
+      <a href="#arrival">Arrival</a>
+      <a href="#captaincy">Captaincy</a>
+      <a href="#board">Honours</a>
+      <a href="#rcb">RCB</a>
+      <a href="#worldcups">World Cups</a>
+      <a href="#stats">Numbers</a>
+      <a href="#present">Now</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="eyebrow">For every Kohli Paglu</span>
+  <div class="hero-number">18</div>
+  <h1>Kohli Paglu</h1>
+  <p class="tagline">A scroll through the innings of Virat Kohli — Delhi ground to World Cup night, one loyal club shirt the whole way through. Still being written.</p>
+  <div class="jersey-strip">
+    <span class="chip" style="background:var(--gold-soft)">TEST · WHITES</span>
+    <span class="chip" style="background:var(--blue)">ODI · BLUE</span>
+    <span class="chip" style="background:var(--teal)">T20I · TEAL</span>
+    <span class="chip" style="background:var(--red)">RCB · RED &amp; GOLD</span>
+  </div>
+</header>
+
+<div class="seam"></div>
+
+<section class="chapter" id="origins" style="--rail:var(--gold-soft)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">1988–2006</span><span class="chapter-tag">Delhi</span></div>
+    <h2>The academy kid from West Delhi</h2>
+    <p>Born <strong>5 November 1988</strong>, Kohli started at the West Delhi Cricket Academy at nine years old under coach Rajkumar Sharma — the only coach he's ever had. He made his first-class debut for Delhi in the Ranji Trophy in 2006.</p>
+    <p>Days into that season, his father passed away overnight. Kohli batted the next morning anyway, carrying Delhi to a follow-on save with 90 runs, then went to the funeral. It's the story teammates still tell about where the resolve came from.</p>
+  </div>
+</section>
+
+<section class="chapter" id="arrival" style="--rail:var(--gold-soft)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">2008–2011</span><span class="chapter-tag">Breakthrough</span></div>
+    <h2>Under-19 champion to World Cup winner</h2>
+    <p>Kohli captained India to the <strong>2008 Under-19 World Cup</strong> title in Malaysia. Months later, the inaugural IPL auction picked him up for Royal Challengers Bangalore — a shirt he would never trade in, for the rest of his career.</p>
+    <p>His ODI debut came that August against Sri Lanka in Dambulla. His Test cap followed in June 2011 at Kingston. In between, a 22-year-old squad member played his part in India's <strong>2011 World Cup</strong> win on home soil, and lifted the <strong>2013 Champions Trophy</strong> as vice-captain.</p>
+    <div class="pull">"Somewhere between the academy nets and Kingston, the fitness overhaul started — the diet, the gym obsession, the running between wickets that made the rest of the dressing room follow suit."</div>
+  </div>
+</section>
+
+<section class="chapter" id="captaincy" style="--rail:var(--blue)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">2014–2022</span><span class="chapter-tag">The armband</span></div>
+    <h2>Captain of a fitter, meaner India</h2>
+    <p>Kohli took over Test captaincy from an injured MS Dhoni in Adelaide in 2014 and made it permanent by 2017. India held the No. 1 Test ranking for years, and Kohli finished with <strong>40 Test wins as captain</strong> — the most by any Indian.</p>
+    <p>The yo-yo fitness test, the insistence on athleticism as a selection criterion, the sheer intensity on the field — this was the era that rewired what an Indian cricketer was supposed to look like. He stepped down from all three formats' captaincy between 2021 and January 2022, handing over a team built in his image.</p>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<section class="board" id="board">
+  <div class="board-panel">
+    <div class="board-title">Honours Board</div>
+    <div class="board-sub">a Paglu's shortlist, not the whole scorecard</div>
+
+    <div class="board-row"><span class="board-year">2011</span><span class="board-entry"><b>World Cup</b> winner, age 22 — a fifty in the tournament opener</span></div>
+    <div class="board-row"><span class="board-year">2013</span><span class="board-entry"><b>Champions Trophy</b> winner as vice-captain</span></div>
+    <div class="board-row"><span class="board-year">2016</span><span class="board-entry"><b>973 runs</b> in one IPL season for RCB — still the competition record. RCB still lost the final</span></div>
+    <div class="board-row"><span class="board-year">2018</span><span class="board-entry">Swept ICC's top individual honours — <b>Cricketer of the Year</b> across formats</span></div>
+    <div class="board-row"><span class="board-year">2022</span><span class="board-entry">Ended a <b>1,020-day</b> century drought with his 71st international hundred, Asia Cup vs Afghanistan</span></div>
+    <div class="board-row"><span class="board-year">2023</span><span class="board-entry">His <b>50th ODI century</b> — World Cup semifinal vs New Zealand, passing Sachin Tendulkar's record, with Tendulkar watching from the stands</span></div>
+    <div class="board-row"><span class="board-year">2024</span><span class="board-entry"><b>T20 World Cup</b> champion in Barbados — 76 off 59 in the final, Player of the Match, then retirement from T20Is</span></div>
+    <div class="board-row"><span class="board-year">2025</span><span class="board-entry">RCB's <b>maiden IPL title</b>, 18 years after his debut for the club — then retirement from Test cricket</span></div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<section class="chapter" id="rcb" style="--rail:var(--red)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">2008–2025</span><span class="chapter-tag">Royal Challengers Bangalore</span></div>
+    <h2>One club, eighteen years, one trophy</h2>
+    <p>Every other Kohli storyline has a twist. This one is loyalty, plain and simple: from the 2008 auction to the day he lifted the cup, Kohli wore only the RCB shirt. He captained the side from 2013 to 2021 through three lost finals — 2009, 2011, 2016 — and the record-breaking, trophy-less 973-run season in between.</p>
+    <p>He'd already handed the captaincy on when RCB finally won it in <strong>2025</strong>, beating Punjab Kings in the final. It didn't matter whose armband it was. For a fanbase that had waited an entire IPL lifetime, the celebration belonged to him as much as anyone in that dugout.</p>
+  </div>
+</section>
+
+<section class="chapter" id="worldcups" style="--rail:var(--teal)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">2023–2024</span><span class="chapter-tag">Redemption</span></div>
+    <h2>The record, then the ring</h2>
+    <p>The 2023 ODI World Cup on home soil was Kohli at his peak — <strong>765 runs</strong>, Player of the Tournament, and that semifinal century in Mumbai that broke a record set before he'd picked up a bat. India still lost the final, to Australia.</p>
+    <p>Eight months later in Barbados, the T20 World Cup final against South Africa went the other way. Kohli's patient 76 off 59 balls anchored the chase; India won by seven runs. He walked off having won the trophy that had gotten away from this generation more than once, and announced his T20I retirement before he'd even left the ground.</p>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<section class="stats" id="stats">
+  <div class="stats-inner">
+    <h2>Runs, by format</h2>
+    <p class="note">Career totals as this chapter was written. Test and T20I are closed books; ODI and IPL bars are still growing.</p>
+    <div class="chart-card">
+      <svg class="bars" viewBox="0 0 640 230" role="img" aria-label="Career runs by format: Test 9230 runs, ODI over 14000 runs and rising, T20I 4188 runs, IPL over 8200 runs and rising">
+        <!-- gridlines -->
+        <line class="grid-line" x1="120" y1="10" x2="120" y2="200"/>
+        <line class="grid-line" x1="260" y1="10" x2="260" y2="200"/>
+        <line class="grid-line" x1="400" y1="10" x2="400" y2="200"/>
+        <line class="grid-line" x1="540" y1="10" x2="540" y2="200"/>
+        <text class="bar-note" x="120" y="216" text-anchor="middle">5,000</text>
+        <text class="bar-note" x="260" y="216" text-anchor="middle">10,000</text>
+        <text class="bar-note" x="400" y="216" text-anchor="middle">15,000</text>
+
+        <!-- Test: closed, solid cap -->
+        <text class="bar-label" x="0" y="34">Test</text>
+        <rect class="bar-hit" x="0" y="16" width="640" height="26"><title>Test — 9,230 runs, 30 centuries, 123 matches (career closed, 2025)</title></rect>
+        <rect class="bar-fill" x="0" y="18" width="258" height="20" rx="4" fill="var(--gold-soft)"/>
+        <text class="bar-value" x="266" y="33">9,230</text>
+
+        <!-- ODI: open, growing -->
+        <text class="bar-label" x="0" y="80">ODI</text>
+        <rect class="bar-hit" x="0" y="62" width="640" height="26"><title>ODI — 14,000+ runs, 51+ centuries, still adding (as of 2025)</title></rect>
+        <defs>
+          <linearGradient id="fadeODI" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="80%" stop-color="var(--blue)"/>
+            <stop offset="100%" stop-color="var(--blue)" stop-opacity="0.25"/>
+          </linearGradient>
+        </defs>
+        <rect class="bar-fill" x="0" y="64" width="392" height="20" rx="4" fill="url(#fadeODI)"/>
+        <text class="bar-value" x="400" y="79">14,000+</text>
+
+        <!-- T20I: closed -->
+        <text class="bar-label" x="0" y="126">T20I</text>
+        <rect class="bar-hit" x="0" y="108" width="640" height="26"><title>T20I — 4,188 runs, 1 century, retired 2024</title></rect>
+        <rect class="bar-fill" x="0" y="110" width="117" height="20" rx="4" fill="var(--teal)"/>
+        <text class="bar-value" x="125" y="125">4,188</text>
+
+        <!-- IPL: open, growing -->
+        <text class="bar-label" x="0" y="172">IPL</text>
+        <rect class="bar-hit" x="0" y="154" width="640" height="26"><title>IPL — 8,200+ runs for RCB, the format's all-time leading run-scorer, still adding</title></rect>
+        <defs>
+          <linearGradient id="fadeIPL" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="80%" stop-color="var(--red)"/>
+            <stop offset="100%" stop-color="var(--red)" stop-opacity="0.25"/>
+          </linearGradient>
+        </defs>
+        <rect class="bar-fill" x="0" y="156" width="230" height="20" rx="4" fill="url(#fadeIPL)"/>
+        <text class="bar-value" x="238" y="171">8,200+</text>
+
+        <line class="grid-line" x1="0" y1="200" x2="540" y2="200" stroke-opacity=".6"/>
+      </svg>
+      <div class="legend-row">
+        <span><i class="legend-dot" style="background:var(--gold-soft)"></i>Test — closed</span>
+        <span><i class="legend-dot" style="background:var(--blue)"></i>ODI — open</span>
+        <span><i class="legend-dot" style="background:var(--teal)"></i>T20I — closed</span>
+        <span><i class="legend-dot" style="background:var(--red)"></i>IPL / RCB — open</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="present" id="present">
+  <div class="present-inner">
+    <h2>The innings continues</h2>
+    <p>Test whites are folded away and the T20I shirt has been handed back. But the blue of the ODI side and the red-and-gold of RCB are both still out there — Kohli hasn't set a date for stumps.</p>
+    <div class="pulse-row"><span class="pulse"></span><span class="pulse"></span><span class="pulse"></span></div>
+    <p>This page is built to grow with him: the next hundred, the next trophy, and — whenever it comes — the retirement post that finally closes the whole innings. Until then, consider this a first draft.</p>
+  </div>
+</section>
+
+<footer>
+  Built for every Kohli Paglu out there. Numbers and dates are the well-documented milestones; check the latest scorecard for anything that's moved since.
+</footer>
+
+<div class="tooltip" id="tip"></div>
+
+<script>
+(function(){
+  try{
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var chapters = document.querySelectorAll('.chapter');
+    if('IntersectionObserver' in window && !reduce){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      chapters.forEach(function(c){ io.observe(c); });
+    } else {
+      chapters.forEach(function(c){ c.classList.add('in'); });
+    }
+  }catch(e){}
+
+  try{
+    var tip = document.getElementById('tip');
+    document.querySelectorAll('.bar-hit').forEach(function(hit){
+      var title = hit.querySelector('title');
+      if(!title) return;
+      var text = title.textContent;
+      hit.addEventListener('mousemove', function(ev){
+        tip.textContent = text;
+        tip.style.left = ev.clientX + 'px';
+        tip.style.top = ev.clientY + 'px';
+        tip.classList.add('show');
+      });
+      hit.addEventListener('mouseleave', function(){ tip.classList.remove('show'); });
+    });
+  }catch(e){}
+
+  try{
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(ev){
+        var id = a.getAttribute('href').slice(1);
+        var target = document.getElementById(id);
+        if(target){
+          ev.preventDefault();
+          target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        }
+      });
+    });
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
