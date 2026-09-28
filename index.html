@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kohli Paglu</title>
-<meta name="description" content="A living scroll through Virat Kohli's career — Delhi academy to World Cup nights, RCB's 18-year wait, and the numbers still growing.">
+<meta name="description" content="A living scroll through Virat Kohli's career - Delhi academy to World Cup nights, RCB's 18-year wait, and the numbers still growing.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -54,7 +54,7 @@
     border-bottom:1px solid var(--line);
   }
   .nav-row{
-    max-width:760px; margin-inline:auto; padding:10px 20px;
+    max-width:1180px; margin-inline:auto; padding:10px 20px;
     display:flex; align-items:center; gap:14px;
   }
   .nav-mark{
@@ -63,12 +63,16 @@
   }
   .nav-links{
     display:flex; gap:4px; overflow-x:auto; scrollbar-width:none;
+    padding-right:24px; scroll-snap-type:x proximity;
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 32px), transparent 100%);
+    mask-image: linear-gradient(to right, black calc(100% - 32px), transparent 100%);
   }
   .nav-links::-webkit-scrollbar{ display:none; }
   .nav-links a{
     flex:none; font-size:12.5px; letter-spacing:.03em; text-transform:uppercase;
     color:var(--ink-dim); text-decoration:none; padding:6px 10px; border-radius:999px;
     white-space:nowrap; transition:background .15s, color .15s;
+    scroll-snap-align:start;
   }
   .nav-links a:hover{ background:var(--ground-2); color:var(--ink); }
 
@@ -147,6 +151,56 @@
     border-radius:8px; font-family:var(--font-display); font-size:16px;
     font-style:italic; color:var(--ink);
   }
+
+  /* ---------- media: photos & video ---------- */
+  .figure{ margin-top:20px; }
+  .figure img{
+    display:block; width:100%; height:auto; max-height:420px; object-fit:cover;
+    border-radius:8px; border:1px solid var(--line); background:var(--ground-2);
+  }
+  .figure figcaption{
+    margin-top:8px; font-family:var(--font-mono); font-size:11px;
+    color:var(--ink-faint); line-height:1.5;
+  }
+  .figure figcaption a{ color:var(--ink-faint); }
+
+  .video-embed{
+    margin-top:20px; position:relative; aspect-ratio:16/9;
+    border-radius:10px; overflow:hidden; border:1px solid var(--line); background:#05070a;
+  }
+  .video-embed iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .video-caption{
+    margin-top:8px !important; font-family:var(--font-mono); font-size:11px;
+    color:var(--ink-faint) !important;
+  }
+
+  .gallery{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+  .gallery .figure{ margin-top:0; }
+  @media (max-width:480px){ .gallery{ grid-template-columns:1fr; } }
+
+  .photo-strip{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:20px; max-width:340px; }
+  .photo-strip img{
+    width:100%; aspect-ratio:1; object-fit:cover; object-position:center;
+    border-radius:8px; border:1px solid var(--line); background:var(--ground-2);
+  }
+  .photo-strip .cap{
+    grid-column:1/-1; font-family:var(--font-mono); font-size:10.5px;
+    color:var(--ink-faint); margin-top:2px;
+  }
+
+  header.hero{ position:relative; overflow:hidden; }
+  .hero-photo{ position:absolute; inset:0; z-index:0; }
+  .hero-photo img{
+    width:100%; height:100%; object-fit:cover; object-position:50% 22%;
+    filter:grayscale(.55) contrast(1.05) brightness(.72); opacity:.6;
+    -webkit-mask-image:radial-gradient(ellipse 78% 62% at 50% 30%, #000 35%, transparent 82%);
+    mask-image:radial-gradient(ellipse 78% 62% at 50% 30%, #000 35%, transparent 82%);
+  }
+  .hero-photo::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(14,17,22,.15), var(--ground) 90%);
+  }
+  header.hero > *:not(.hero-photo){ position:relative; z-index:1; }
 
   /* ---------- honours board ---------- */
   section.board{ padding:52px 20px; border-bottom:1px solid var(--line); }
@@ -242,11 +296,20 @@
     <span class="nav-mark">№18</span>
     <div class="nav-links">
       <a href="#origins">Origins</a>
+      <a href="#junior">Junior</a>
       <a href="#arrival">Arrival</a>
+      <a href="#riser">Rise</a>
       <a href="#captaincy">Captaincy</a>
-      <a href="#board">Honours</a>
+      <a href="#peak">Peak</a>
+      <a href="#slump">The Wait</a>
+      <a href="#turnaround">Comeback</a>
+      <a href="#worldcup2023">2023 WC</a>
+      <a href="#t20wc2024">T20 WC</a>
+      <a href="#trophy2025">2025</a>
       <a href="#rcb">RCB</a>
-      <a href="#worldcups">World Cups</a>
+      <a href="#backtoback">IPL '26</a>
+      <a href="#fifteenk">15K</a>
+      <a href="#board">Honours</a>
       <a href="#stats">Numbers</a>
       <a href="#present">Now</a>
     </div>
@@ -254,10 +317,13 @@
 </nav>
 
 <header class="hero">
+  <div class="hero-photo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Virat_Kohli_portrait.jpg" alt="Portrait of Virat Kohli" loading="eager">
+  </div>
   <span class="eyebrow">For every Kohli Paglu</span>
   <div class="hero-number">18</div>
   <h1>Kohli Paglu</h1>
-  <p class="tagline">A scroll through the innings of Virat Kohli — Delhi ground to World Cup night, one loyal club shirt the whole way through. Still being written.</p>
+  <p class="tagline">A scroll through the innings of Virat Kohli - Delhi ground to World Cup night, one loyal club shirt the whole way through. Still being written.</p>
   <div class="jersey-strip">
     <span class="chip" style="background:var(--gold-soft)">TEST · WHITES</span>
     <span class="chip" style="background:var(--blue)">ODI · BLUE</span>
@@ -272,27 +338,246 @@
   <div class="chapter-inner">
     <div class="chapter-meta"><span class="chapter-years">1988–2006</span><span class="chapter-tag">Delhi</span></div>
     <h2>The academy kid from West Delhi</h2>
-    <p>Born <strong>5 November 1988</strong>, Kohli started at the West Delhi Cricket Academy at nine years old under coach Rajkumar Sharma — the only coach he's ever had. He made his first-class debut for Delhi in the Ranji Trophy in 2006.</p>
-    <p>Days into that season, his father passed away overnight. Kohli batted the next morning anyway, carrying Delhi to a follow-on save with 90 runs, then went to the funeral. It's the story teammates still tell about where the resolve came from.</p>
+    <p>Born <strong>5 November 1988</strong> in Delhi, Kohli started at the West Delhi Cricket Academy at nine years old under coach Rajkumar Sharma - the only coach he's ever had. At fourteen he was already captaining Delhi's Under-15 side; a year later he made 470 runs across four Vijay Merchant Trophy innings, including a top score of 251 not out.</p>
+    <p>He made his first-class debut for Delhi in November 2006, out for 10. Weeks later, on <strong>18 December 2006</strong>, his father Prem Nath Kohli died overnight from a stroke. Kohli batted for Delhi against Karnataka the next morning anyway, made 90 to help save the follow-on, then left for the funeral. It's the story teammates still tell about where the resolve came from.</p>
+    <div class="photo-strip">
+      <img src="Images/KohliChildHood.png" alt="Virat Kohli as a young child" loading="lazy">
+      <img src="Images/KohliChildHood2.png" alt="Virat Kohli as a boy on a pony ride" loading="lazy">
+      <span class="cap">Before all of it: a Delhi childhood.</span>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="junior" style="--rail:var(--gold-soft)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">2006–2008</span><span class="chapter-tag">Under-19</span></div>
+    <h2>A World Cup, then a $30,000 signing</h2>
+    <p>A tour of England with the India Under-19s in 2006 was followed by the job that mattered: captain of the side that won the <strong>2008 Under-19 World Cup</strong> in Malaysia, Kohli scoring 235 runs at an average of 47 through the tournament.</p>
+    <p>Weeks later, the inaugural Indian Premier League auction picked him up for Royal Challengers Bangalore - for <strong>$30,000</strong>. He would never play for another franchise.</p>
+    <div class="gallery">
+      <figure class="figure">
+        <img src="Images/KohliCricketEarlyDays.png" alt="A young Virat Kohli with Rahul Dravid and junior teammates" loading="lazy">
+        <figcaption>With Rahul Dravid and the junior squad, mid-2000s.</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="Images/u19-world-cup.png" alt="Virat Kohli holding the Under-19 World Cup trophy in 2008" loading="lazy">
+        <figcaption>Under-19 World Cup champion and captain, Kuala Lumpur, 2008.</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
 <section class="chapter" id="arrival" style="--rail:var(--gold-soft)">
   <div class="chapter-inner">
     <div class="chapter-meta"><span class="chapter-years">2008–2011</span><span class="chapter-tag">Breakthrough</span></div>
-    <h2>Under-19 champion to World Cup winner</h2>
-    <p>Kohli captained India to the <strong>2008 Under-19 World Cup</strong> title in Malaysia. Months later, the inaugural IPL auction picked him up for Royal Challengers Bangalore — a shirt he would never trade in, for the rest of his career.</p>
-    <p>His ODI debut came that August against Sri Lanka in Dambulla. His Test cap followed in June 2011 at Kingston. In between, a 22-year-old squad member played his part in India's <strong>2011 World Cup</strong> win on home soil, and lifted the <strong>2013 Champions Trophy</strong> as vice-captain.</p>
-    <div class="pull">"Somewhere between the academy nets and Kingston, the fitness overhaul started — the diet, the gym obsession, the running between wickets that made the rest of the dressing room follow suit."</div>
+    <h2>Into the India side</h2>
+    <p>His ODI debut came on <strong>18 August 2008</strong> against Sri Lanka in Dambulla - a surprise call-up, out for 12 first time up. His maiden ODI century followed that December, and by 2010 he was the fastest Indian to 1,000 ODI runs. His Test cap came on <strong>20 June 2011</strong> at Kingston.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/rcPC96LO_3o" title="Virat Kohli's ODI debut vs Sri Lanka, 2008" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">The debut, Dambulla, 18 August 2008.</p>
+    <p>In between, a 22-year-old squad member played his part in India's <strong>2011 World Cup</strong> win on home soil, scoring 35 in the final at Wankhede.</p>
+    <figure class="figure">
+      <img src="Images/2011-world-cup.png" alt="Virat Kohli celebrating the 2011 World Cup win, carrying coach Gary Kirsten on his shoulders" loading="lazy">
+      <figcaption>Carrying coach Gary Kirsten off after the 2011 World Cup final, Wankhede Stadium.</figcaption>
+    </figure>
+    <div class="pull">"Somewhere between the academy nets and Kingston, the fitness overhaul started - the diet, the gym obsession, the running between wickets that made the rest of the dressing room follow suit."</div>
+  </div>
+</section>
+
+<section class="chapter" id="riser" style="--rail:var(--gold-soft)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">2012–2013</span><span class="chapter-tag">Chase Master, vice-captain</span></div>
+    <h2>Hobart, then 183 in Dhaka</h2>
+    <p>His maiden Test century came in Adelaide in January 2012. Six weeks later in Hobart, chasing 321 against Sri Lanka, he made an unbeaten <strong>133 off 86 balls</strong> - 24 runs off a single Lasith Malinga over - and got India home with 80 balls to spare. Fans would later vote it the best of his 50 ODI hundreds.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/ZRe4j-UUifM" title="Virat Kohli's 133 not out vs Sri Lanka, Hobart 2012" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">Hobart, 28 February 2012 - from cricket.com.au's archive.</p>
+    <figure class="figure">
+      <img src="Images/hobart-133.png" alt="Virat Kohli celebrating his century in Hobart, 2012, next to MS Dhoni" loading="lazy">
+      <figcaption>Bat raised, Hobart, alongside MS Dhoni.</figcaption>
+    </figure>
+    <p>A month after that, at the Asia Cup in Dhaka, he made a career-best <strong>183 off 148</strong> against Pakistan. He was named ODI vice-captain, then lifted the <strong>2013 Champions Trophy</strong> in that role as India went unbeaten through the tournament. In March 2013 he set up the <strong>Virat Kohli Foundation</strong>, years before athlete philanthropy was the norm in Indian cricket.</p>
+    <figure class="figure">
+      <img src="Images/rapport-with-seniors.png" alt="Virat Kohli laughing with Sachin Tendulkar at a training session" loading="lazy">
+      <figcaption>With Sachin Tendulkar at training - years before the record would change hands.</figcaption>
+    </figure>
   </div>
 </section>
 
 <section class="chapter" id="captaincy" style="--rail:var(--blue)">
   <div class="chapter-inner">
-    <div class="chapter-meta"><span class="chapter-years">2014–2022</span><span class="chapter-tag">The armband</span></div>
-    <h2>Captain of a fitter, meaner India</h2>
-    <p>Kohli took over Test captaincy from an injured MS Dhoni in Adelaide in 2014 and made it permanent by 2017. India held the No. 1 Test ranking for years, and Kohli finished with <strong>40 Test wins as captain</strong> — the most by any Indian.</p>
-    <p>The yo-yo fitness test, the insistence on athleticism as a selection criterion, the sheer intensity on the field — this was the era that rewired what an Indian cricketer was supposed to look like. He stepped down from all three formats' captaincy between 2021 and January 2022, handing over a team built in his image.</p>
+    <div class="chapter-meta"><span class="chapter-years">2014–2015</span><span class="chapter-tag">The armband</span></div>
+    <h2>Captain, from his first innings</h2>
+    <p>When MS Dhoni retired mid-series in Australia in December 2014, the Test captaincy passed to Kohli - and in the very next Test, at Adelaide, he made <strong>115 and 141</strong> in the two innings, chasing an almost-impossible target instead of playing for the draw. India lost by 48 runs, but the message was sent: <strong>692 runs</strong> in the series, still the most ever by an Indian batter in Australia.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/GTPk7_OAhHw" title="Virat Kohli's first century as Test captain, Adelaide 2014" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">The first of the Adelaide tons - from cricket.com.au's archive.</p>
+    <p>Months later at the 2014 World T20 he was Player of the Tournament with 319 runs; a year after that, a century against Pakistan lit up the 2015 World Cup. Full control of all three formats followed by 2017.</p>
+  </div>
+</section>
+
+<section class="chapter" id="peak" style="--rail:var(--blue)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">2016–2019</span><span class="chapter-tag">The peak</span></div>
+    <h2>Four double centuries, one after another</h2>
+    <p>March 2016: a virtual-knockout T20 World Cup game against Australia at Mohali, chasing 161 with the required rate ballooning past ten an over - Kohli finished unbeaten on <strong>82 off 51</strong>, a knock MS Dhoni called incredible and Kohli still rates his best in the format. Two months later he battled through <strong>113 off 50</strong> for RCB with nine stitches in a split webbing, in a rain-shortened 15-over game - his fourth century of a season that finished with a still-standing record <strong>973 IPL runs</strong>.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/mJHmvFPXW4Y" title="Virat Kohli's 113 off 50 with a stitched hand, IPL 2016" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">113 off 50, nine stitches, RCB vs Kings XI Punjab, May 2016.</p>
+    <p>Then the Test batting went somewhere no one had been: double centuries in four consecutive series - West Indies (Antigua, July 2016), New Zealand (October 2016), England (December 2016) and Bangladesh (February 2017). No batter, not Bradman, not Dravid, had ever done that.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/iwx2RXfnB-k" title="Virat Kohli's 235 vs England, 2016" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">235 vs England, Mumbai, December 2016 - the third of the four.</p>
+    <p>He kept going - 243 at home in Delhi that same December, his sixth double century, then 593 runs across a losing 2018 tour of England, then a first-ever Indian Test series win in Australia in 2018–19, then a career-best <strong>254 not out</strong> against South Africa in Pune in October 2019 - his seventh Test double century, more than anyone else in Indian history.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/KG2yJ_rSwZY" title="Virat Kohli's 254 not out vs South Africa, Pune 2019" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">254 not out vs South Africa, Pune, October 2019 - his career-best score.</p>
+    <p>The honours followed: <strong>Padma Shri</strong> in March 2017, the <strong>Khel Ratna</strong> - India's highest sporting award - in September 2018, and the No. 1 Test batting ranking. He married Anushka Sharma in Florence that December.</p>
+    <div class="gallery">
+      <figure class="figure">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Virat_Kohli_after_his_century_at_Trent_Bridge.jpg" alt="Virat Kohli celebrating a Test century at Trent Bridge, 2018" loading="lazy">
+        <figcaption>Trent Bridge, August 2018.</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="Images/PadamShri.jpg" alt="Virat Kohli receiving the Padma Shri from President Pranab Mukherjee" loading="lazy">
+        <figcaption>Receiving the Padma Shri from President Pranab Mukherjee, March 2017.</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="Images/KhelRatna.png" alt="Virat Kohli receiving the Khel Ratna from President Ram Nath Kovind" loading="lazy">
+        <figcaption>The Khel Ratna, from President Ram Nath Kovind, September 2018.</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="Images/virat_anu001.jpg" alt="Virat Kohli and Anushka Sharma at their wedding in Florence" loading="lazy">
+        <figcaption>Florence, 11 December 2017.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<section class="chapter" id="slump" style="--rail:var(--ink-faint)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">2019–2022</span><span class="chapter-tag">The wait</span></div>
+    <h2>The longest 1,020 days</h2>
+    <p>His 70th international century came in November 2019. Then nothing - no hundred, in any format, for nearly three years. Form dipped, and the captaincy went with it: T20I first, then ODI, then Test, handed over one format at a time between 2021 and January 2022. His daughter Vamika was born that January, a quiet counterweight to a very public slump.</p>
+    <p>He kept working. In 2021 he put ₹2 crore of his own money into a COVID relief fund and helped raise over ₹11 crore more. The runs, everyone assumed, would come back eventually. Nobody knew exactly when.</p>
+  </div>
+</section>
+
+<section class="chapter" id="turnaround" style="--rail:var(--teal)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">Sep–Oct 2022</span><span class="chapter-tag">The turn</span></div>
+    <h2>Asia Cup, then the shot of the century</h2>
+    <p>The drought broke on <strong>8 September 2022</strong> - an unbeaten <strong>122</strong> against Afghanistan at the Asia Cup, 1,020 days since the last one. Six weeks later, at the T20 World Cup against Pakistan at the MCG, he made <strong>82 not out off 53 balls</strong>, chasing 160 from 31 for 4, finished with a slower ball from Haris Rauf lifted straight down the ground for six - a shot the ICC later called the Shot of the Century. Kohli said afterwards he rated it higher than any innings he'd played, given the occasion.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/j0W8RychWuY?start=482" title="Virat Kohli's 82 not out vs Pakistan, T20 World Cup 2022, MCG" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">82 not out off 53, the MCG, 23 October 2022.</p>
+    <p>Ninety thousand people at the MCG watched the King get his crown back.</p>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<section class="chapter" id="worldcup2023" style="--rail:var(--teal)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">May–Nov 2023</span><span class="chapter-tag">Full flow</span></div>
+    <h2>The record, four months in the making</h2>
+    <p>Kohli walked into the year in ominous form: back-to-back IPL centuries that May - 100 off 63 against Sunrisers Hyderabad, then 101 not out against Gujarat Titans, the innings that took him past Chris Gayle for the most centuries in IPL history.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/up0kY5PBl_g" title="Virat Kohli's back-to-back IPL centuries, May 2023" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">Back-to-back IPL centuries, vs SRH then GT, May 2023.</p>
+    <p>In September, an unbeaten <strong>122</strong> against Pakistan at the Asia Cup made him the fastest to 13,000 ODI runs.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/f3nuYAJ6hr8" title="Virat Kohli's 122 not out vs Pakistan, Asia Cup 2023" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">122 not out vs Pakistan, Asia Cup Super 4, Colombo, September 2023.</p>
+    <p>Then the World Cup itself, at home: <strong>765 runs</strong>, Player of the Tournament. On his 35th birthday, <strong>5 November</strong>, he equalled Sachin Tendulkar's 49 ODI centuries against South Africa at Eden Gardens, in front of 60,000 people.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/onfPIBNl9zs" title="Virat Kohli's 49th ODI century vs South Africa, on his birthday, 2023" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">The 49th ODI century, on his birthday, Eden Gardens, 5 November 2023.</p>
+    <p>Ten days later in the semifinal against New Zealand at Wankhede - the same ground India won the 2011 final - he went one better: his <strong>50th ODI century</strong>, past Tendulkar's record, with Tendulkar himself watching from the stands. India still lost the final, to Australia.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/5-_n4mQ1qC0" title="Virat Kohli's 50th ODI century vs New Zealand, World Cup 2023 semifinal" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">The 50th ODI century, semifinal vs New Zealand, Wankhede, 15 November 2023.</p>
+  </div>
+</section>
+
+<section class="chapter" id="t20wc2024" style="--rail:var(--teal)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">Feb–Jun 2024</span><span class="chapter-tag">Redemption</span></div>
+    <h2>A son, then the trophy that had gotten away</h2>
+    <p>His son Akaay was born in February 2024. Four months later in Barbados, the T20 World Cup final against South Africa went the other way - Kohli's 76 off 59 anchored the chase, India won by seven runs, and he retired from T20Is before he'd even left the ground.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/3yiWqnKl7lQ" title="T20 World Cup 2024 final, India vs South Africa" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">The 2024 T20 World Cup final, Barbados - ICC's own recap.</p>
+    <figure class="figure">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Virat_Kohli_in_PMO_New_Delhi.jpg" alt="Virat Kohli in the T20 World Cup 2024 winning jersey, at the Prime Minister's Office" loading="lazy">
+      <figcaption>With the T20 World Cup 2024 squad at the Prime Minister's Office, New Delhi, July 2024. Photo: Hemant Joshi / Prime Minister's Office, GODL-India, via Wikimedia Commons.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter" id="trophy2025" style="--rail:var(--blue)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">Feb–May 2025</span><span class="chapter-tag">Champions, then goodbye to whites</span></div>
+    <h2>One more trophy, then the Test cap comes off</h2>
+    <p>At the 2025 Champions Trophy in Dubai, Kohli made an unbeaten <strong>100 off 111</strong> - his 51st ODI century - to see off Pakistan in the group stage, then 84 against Australia in the semifinal, helping India to their third Champions Trophy title - and, along the way, becoming the fastest to <strong>14,000 ODI runs</strong>.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/clEzcEjSVDA" title="Virat Kohli's 51st ODI century vs Pakistan, Champions Trophy 2025" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">The winning shot, 51st ODI century, vs Pakistan, Dubai, February 2025.</p>
+    <p>Ten weeks later, on <strong>12 May 2025</strong>, he announced his retirement from Test cricket - 123 matches, 9,230 runs, 30 centuries, seven of them doubles. Fourteen years after Kingston, the whites came off for good.</p>
+  </div>
+</section>
+
+<section class="chapter" id="rcb" style="--rail:var(--red)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">2008–2025</span><span class="chapter-tag">Royal Challengers Bengaluru</span></div>
+    <h2>One club, eighteen seasons, one trophy</h2>
+    <p>Every other Kohli storyline has a twist. This one is loyalty, plain and simple: from the 2008 auction to the day he lifted the cup, Kohli wore only the RCB shirt. He captained the side from 2013 to 2021 through three lost finals - 2009, 2011, 2016 - and the record-breaking, trophy-less 973-run season in between.</p>
+    <p>He'd already handed the captaincy on when RCB finally won it in <strong>June 2025</strong>, beating Punjab Kings in the final by six runs. It didn't matter whose armband it was. For a fanbase that had waited an entire IPL lifetime, the celebration belonged to him as much as anyone in that dugout - he broke down in tears as the last ball went over the rope.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/KntOGN-KEx8" title="RCB win the IPL 2025 final vs Punjab Kings" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">The winning moment, RCB vs Punjab Kings, IPL 2025 final.</p>
+  </div>
+</section>
+
+<section class="chapter" id="backtoback" style="--rail:var(--red)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">2026</span><span class="chapter-tag">Defending champions</span></div>
+    <h2>Back-to-back</h2>
+    <p>RCB didn't stop at one. In the 2026 final against Gujarat Titans, chasing a modest 156, Kohli made an unbeaten <strong>75 off 42</strong> - his fastest IPL half-century, off 25 balls - to see the job through with five wickets in hand. Player of the Match, and RCB's second straight title.</p>
+    <p>Seventeen years without a trophy, then two in a row. At 37, still the most dangerous chase in the format.</p>
+    <figure class="figure">
+      <img src="Images/ipl-2026-final.png" alt="Virat Kohli during the IPL 2026 final" loading="lazy">
+      <figcaption>The 2026 final, against Gujarat Titans.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter" id="fifteenk" style="--rail:var(--blue)">
+  <div class="chapter-inner">
+    <div class="chapter-meta"><span class="chapter-years">27 Sep 2026</span><span class="chapter-tag">This week</span></div>
+    <h2>Second to reach the summit</h2>
+    <p>Against West Indies in Thiruvananthapuram, an unbeaten <strong>139 off 88</strong> - his 55th ODI century - took Kohli to <strong>15,000 ODI runs</strong> - only the second batter ever, after Sachin Tendulkar, to get there. He reached it in his 303rd innings, 74 innings faster than Sachin did.</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/mS6UKSIUgKg" title="Virat Kohli's 139 not out vs West Indies, 55th ODI century, 2026" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">139 not out off 88, Thiruvananthapuram, 27 September 2026.</p>
+    <p>India chased down 296 with 50 balls to spare. This page was still being written when it happened.</p>
   </div>
 </section>
 
@@ -303,34 +588,17 @@
     <div class="board-title">Honours Board</div>
     <div class="board-sub">a Paglu's shortlist, not the whole scorecard</div>
 
-    <div class="board-row"><span class="board-year">2011</span><span class="board-entry"><b>World Cup</b> winner, age 22 — a fifty in the tournament opener</span></div>
-    <div class="board-row"><span class="board-year">2013</span><span class="board-entry"><b>Champions Trophy</b> winner as vice-captain</span></div>
-    <div class="board-row"><span class="board-year">2016</span><span class="board-entry"><b>973 runs</b> in one IPL season for RCB — still the competition record. RCB still lost the final</span></div>
-    <div class="board-row"><span class="board-year">2018</span><span class="board-entry">Swept ICC's top individual honours — <b>Cricketer of the Year</b> across formats</span></div>
-    <div class="board-row"><span class="board-year">2022</span><span class="board-entry">Ended a <b>1,020-day</b> century drought with his 71st international hundred, Asia Cup vs Afghanistan</span></div>
-    <div class="board-row"><span class="board-year">2023</span><span class="board-entry">His <b>50th ODI century</b> — World Cup semifinal vs New Zealand, passing Sachin Tendulkar's record, with Tendulkar watching from the stands</span></div>
-    <div class="board-row"><span class="board-year">2024</span><span class="board-entry"><b>T20 World Cup</b> champion in Barbados — 76 off 59 in the final, Player of the Match, then retirement from T20Is</span></div>
-    <div class="board-row"><span class="board-year">2025</span><span class="board-entry">RCB's <b>maiden IPL title</b>, 18 years after his debut for the club — then retirement from Test cricket</span></div>
-  </div>
-</section>
-
-<div class="seam"></div>
-
-<section class="chapter" id="rcb" style="--rail:var(--red)">
-  <div class="chapter-inner">
-    <div class="chapter-meta"><span class="chapter-years">2008–2025</span><span class="chapter-tag">Royal Challengers Bangalore</span></div>
-    <h2>One club, eighteen years, one trophy</h2>
-    <p>Every other Kohli storyline has a twist. This one is loyalty, plain and simple: from the 2008 auction to the day he lifted the cup, Kohli wore only the RCB shirt. He captained the side from 2013 to 2021 through three lost finals — 2009, 2011, 2016 — and the record-breaking, trophy-less 973-run season in between.</p>
-    <p>He'd already handed the captaincy on when RCB finally won it in <strong>2025</strong>, beating Punjab Kings in the final. It didn't matter whose armband it was. For a fanbase that had waited an entire IPL lifetime, the celebration belonged to him as much as anyone in that dugout.</p>
-  </div>
-</section>
-
-<section class="chapter" id="worldcups" style="--rail:var(--teal)">
-  <div class="chapter-inner">
-    <div class="chapter-meta"><span class="chapter-years">2023–2024</span><span class="chapter-tag">Redemption</span></div>
-    <h2>The record, then the ring</h2>
-    <p>The 2023 ODI World Cup on home soil was Kohli at his peak — <strong>765 runs</strong>, Player of the Tournament, and that semifinal century in Mumbai that broke a record set before he'd picked up a bat. India still lost the final, to Australia.</p>
-    <p>Eight months later in Barbados, the T20 World Cup final against South Africa went the other way. Kohli's patient 76 off 59 balls anchored the chase; India won by seven runs. He walked off having won the trophy that had gotten away from this generation more than once, and announced his T20I retirement before he'd even left the ground.</p>
+    <div class="board-row"><span class="board-year">2008</span><span class="board-entry"><b>Under-19 World Cup</b> winner and captain, Malaysia</span></div>
+    <div class="board-row"><span class="board-year">2011</span><span class="board-entry"><b>World Cup</b> winner, age 22 - 35 in the final at Wankhede</span></div>
+    <div class="board-row"><span class="board-year">2013</span><span class="board-entry"><b>Champions Trophy</b> winner as vice-captain, India unbeaten</span></div>
+    <div class="board-row"><span class="board-year">2016–17</span><span class="board-entry">Four <b>double centuries</b> in four straight Test series - first batter ever to do it</span></div>
+    <div class="board-row"><span class="board-year">2016</span><span class="board-entry"><b>973 runs</b> in one IPL season for RCB - still the competition record. RCB still lost the final</span></div>
+    <div class="board-row"><span class="board-year">2018</span><span class="board-entry"><b>Khel Ratna</b>, India's highest sporting honour, and the first player ever to sweep ICC's Test, ODI and overall Cricketer of the Year in one year</span></div>
+    <div class="board-row"><span class="board-year">2022</span><span class="board-entry">Ended a <b>1,020-day</b> century drought vs Afghanistan, then <b>82 not out</b> vs Pakistan at the MCG six weeks later</span></div>
+    <div class="board-row"><span class="board-year">2023</span><span class="board-entry">His <b>50th ODI century</b> - World Cup semifinal vs New Zealand, passing Sachin Tendulkar's record, with Tendulkar watching from the stands</span></div>
+    <div class="board-row"><span class="board-year">2024</span><span class="board-entry"><b>T20 World Cup</b> champion in Barbados - 76 off 59 in the final, Player of the Match, then retirement from T20Is</span></div>
+    <div class="board-row"><span class="board-year">2025</span><span class="board-entry"><b>Champions Trophy</b> winner, fastest to 14,000 ODI runs - then retirement from Test cricket - then RCB's <b>maiden IPL title</b>, 18 seasons in</span></div>
+    <div class="board-row"><span class="board-year">2026</span><span class="board-entry">RCB <b>back-to-back champions</b> - 75 not out off 42 in the final, Player of the Match; then <b>15,000 ODI runs</b>, second only to Tendulkar, 74 innings faster</span></div>
   </div>
 </section>
 
@@ -341,7 +609,7 @@
     <h2>Runs, by format</h2>
     <p class="note">Career totals as this chapter was written. Test and T20I are closed books; ODI and IPL bars are still growing.</p>
     <div class="chart-card">
-      <svg class="bars" viewBox="0 0 640 230" role="img" aria-label="Career runs by format: Test 9230 runs, ODI over 14000 runs and rising, T20I 4188 runs, IPL over 8200 runs and rising">
+      <svg class="bars" viewBox="0 0 640 230" role="img" aria-label="Career runs by format: Test 9230 runs, ODI over 15080 runs and rising, T20I 4188 runs, IPL over 9336 runs and rising">
         <!-- gridlines -->
         <line class="grid-line" x1="120" y1="10" x2="120" y2="200"/>
         <line class="grid-line" x1="260" y1="10" x2="260" y2="200"/>
@@ -353,47 +621,47 @@
 
         <!-- Test: closed, solid cap -->
         <text class="bar-label" x="0" y="34">Test</text>
-        <rect class="bar-hit" x="0" y="16" width="640" height="26"><title>Test — 9,230 runs, 30 centuries, 123 matches (career closed, 2025)</title></rect>
+        <rect class="bar-hit" x="0" y="16" width="640" height="26"><title>Test - 9,230 runs, 30 centuries, 123 matches (career closed, 2025)</title></rect>
         <rect class="bar-fill" x="0" y="18" width="258" height="20" rx="4" fill="var(--gold-soft)"/>
         <text class="bar-value" x="266" y="33">9,230</text>
 
         <!-- ODI: open, growing -->
         <text class="bar-label" x="0" y="80">ODI</text>
-        <rect class="bar-hit" x="0" y="62" width="640" height="26"><title>ODI — 14,000+ runs, 51+ centuries, still adding (as of 2025)</title></rect>
+        <rect class="bar-hit" x="0" y="62" width="640" height="26"><title>ODI - 15,080+ runs, 55 centuries, most ODI hundreds ever - still adding</title></rect>
         <defs>
           <linearGradient id="fadeODI" x1="0" y1="0" x2="1" y2="0">
             <stop offset="80%" stop-color="var(--blue)"/>
             <stop offset="100%" stop-color="var(--blue)" stop-opacity="0.25"/>
           </linearGradient>
         </defs>
-        <rect class="bar-fill" x="0" y="64" width="392" height="20" rx="4" fill="url(#fadeODI)"/>
-        <text class="bar-value" x="400" y="79">14,000+</text>
+        <rect class="bar-fill" x="0" y="64" width="422" height="20" rx="4" fill="url(#fadeODI)"/>
+        <text class="bar-value" x="430" y="79">15,080+</text>
 
         <!-- T20I: closed -->
         <text class="bar-label" x="0" y="126">T20I</text>
-        <rect class="bar-hit" x="0" y="108" width="640" height="26"><title>T20I — 4,188 runs, 1 century, retired 2024</title></rect>
+        <rect class="bar-hit" x="0" y="108" width="640" height="26"><title>T20I - 4,188 runs, 1 century, retired 2024</title></rect>
         <rect class="bar-fill" x="0" y="110" width="117" height="20" rx="4" fill="var(--teal)"/>
         <text class="bar-value" x="125" y="125">4,188</text>
 
         <!-- IPL: open, growing -->
         <text class="bar-label" x="0" y="172">IPL</text>
-        <rect class="bar-hit" x="0" y="154" width="640" height="26"><title>IPL — 8,200+ runs for RCB, the format's all-time leading run-scorer, still adding</title></rect>
+        <rect class="bar-hit" x="0" y="154" width="640" height="26"><title>IPL - 9,336+ runs for RCB, the format's all-time leading run-scorer, still adding</title></rect>
         <defs>
           <linearGradient id="fadeIPL" x1="0" y1="0" x2="1" y2="0">
             <stop offset="80%" stop-color="var(--red)"/>
             <stop offset="100%" stop-color="var(--red)" stop-opacity="0.25"/>
           </linearGradient>
         </defs>
-        <rect class="bar-fill" x="0" y="156" width="230" height="20" rx="4" fill="url(#fadeIPL)"/>
-        <text class="bar-value" x="238" y="171">8,200+</text>
+        <rect class="bar-fill" x="0" y="156" width="261" height="20" rx="4" fill="url(#fadeIPL)"/>
+        <text class="bar-value" x="269" y="171">9,336+</text>
 
         <line class="grid-line" x1="0" y1="200" x2="540" y2="200" stroke-opacity=".6"/>
       </svg>
       <div class="legend-row">
-        <span><i class="legend-dot" style="background:var(--gold-soft)"></i>Test — closed</span>
-        <span><i class="legend-dot" style="background:var(--blue)"></i>ODI — open</span>
-        <span><i class="legend-dot" style="background:var(--teal)"></i>T20I — closed</span>
-        <span><i class="legend-dot" style="background:var(--red)"></i>IPL / RCB — open</span>
+        <span><i class="legend-dot" style="background:var(--gold-soft)"></i>Test - closed</span>
+        <span><i class="legend-dot" style="background:var(--blue)"></i>ODI - open</span>
+        <span><i class="legend-dot" style="background:var(--teal)"></i>T20I - closed</span>
+        <span><i class="legend-dot" style="background:var(--red)"></i>IPL / RCB - open</span>
       </div>
     </div>
   </div>
@@ -401,15 +669,15 @@
 
 <section class="present" id="present">
   <div class="present-inner">
-    <h2>The innings continues</h2>
-    <p>Test whites are folded away and the T20I shirt has been handed back. But the blue of the ODI side and the red-and-gold of RCB are both still out there — Kohli hasn't set a date for stumps.</p>
+    <h2>Still the first name on the team sheet</h2>
+    <p>Test whites are folded away and the T20I shirt has been handed back. But the ODI blue and the RCB red-and-gold are both still live - two IPL titles in a row, a Champions Trophy, and, just days ago, a seat next to Sachin Tendulkar as the only two men ever to reach 15,000 ODI runs.</p>
     <div class="pulse-row"><span class="pulse"></span><span class="pulse"></span><span class="pulse"></span></div>
-    <p>This page is built to grow with him: the next hundred, the next trophy, and — whenever it comes — the retirement post that finally closes the whole innings. Until then, consider this a first draft.</p>
+    <p>This page is built to grow with him: the next hundred, the next trophy, and - whenever it comes - the retirement post that finally closes the whole innings. Until then, consider this a first draft.</p>
   </div>
 </section>
 
 <footer>
-  Built for every Kohli Paglu out there. Numbers and dates are the well-documented milestones; check the latest scorecard for anything that's moved since.
+  Photos are Wikimedia Commons uploads, credited under each image. Built for every Kohli Paglu out there.
 </footer>
 
 <div class="tooltip" id="tip"></div>
